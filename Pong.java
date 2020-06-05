@@ -2,7 +2,6 @@ import java.awt.*;
 import java.awt.geom.*;
 import java.awt.event.KeyEvent;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 
 import java.util.Random;
 import java.util.Timer;
@@ -12,7 +11,8 @@ public class Pong extends Canvas
 	Point delta;
 	Ellipse2D.Double ball;
 	Rectangle paddle1, paddle2;
-	static int bluePoints = 0, redPoints = 0;
+	static int bluePoints = 0;
+	static int redPoints = 0;
 	
 	public static void main( String[] args )
 	{
@@ -57,7 +57,7 @@ public class Pong extends Canvas
 		
 		g2.setColor(Color.red);
 		g2.fill(paddle2);
-		
+		// added drawString for showing the score
 		g.drawString("Blue score: " + bluePoints, 30, 20);
 		g.drawString("Red score: " + redPoints, 900, 20);
 	}
@@ -67,7 +67,7 @@ public class Pong extends Canvas
 		if ( e.getID() == KeyEvent.KEY_PRESSED )
 		{
 			if ( e.getKeyCode() == KeyEvent.VK_W )
-			{
+			{	// keeps the paddle in the screen (top side)
 				if ( paddle1.y > 0 ) {
 					paddle1.y -= 30; 
 				} else {
@@ -75,7 +75,7 @@ public class Pong extends Canvas
 				}
 			}
 			if ( e.getKeyCode() == KeyEvent.VK_S )
-			{
+			{	// keeps the paddle in the screen (bottom side)
 				if ( paddle1.y < 515 ) {
 					paddle1.y += 30;
 				} else {
@@ -83,7 +83,7 @@ public class Pong extends Canvas
 				}
 			}
 			if ( e.getKeyCode() == KeyEvent.VK_UP )
-			{
+			{	// keeps the paddle in the screen (top side)
 				if ( paddle2.y > 0 ) {
 					paddle2.y -= 30; 
 				} else {
@@ -91,7 +91,7 @@ public class Pong extends Canvas
 				}
 			}
 			if ( e.getKeyCode() == KeyEvent.VK_DOWN )
-			{
+			{	// keeps the paddle in the screen (bottom side)
 				if ( paddle2.y < 515 ) {
 					paddle2.y += 30;
 				} else {
@@ -108,7 +108,7 @@ public class Pong extends Canvas
 
 		// and bounce if we hit top/bottom wall
 		if ( ball.y < 0 || ball.y+20 > 700 )
-			delta.y = -delta.y;
+			delta.y = -delta.y;	// only bounces off top and bottom walls
 			
 		// check if the ball is hitting the paddle
 		if ( ball.intersects(paddle1) ) {
@@ -120,14 +120,14 @@ public class Pong extends Canvas
 		// check for scoring
 		if ( ball.x > 1000 )
 		{
-			bluePoints += 1;
+			bluePoints += 1;	// increments blue score
 			ball.x = 500;
 			ball.y = 350;
 			delta = new Point(-5,5);
 		}
 		if ( ball.x < 0 )
 		{
-			redPoints += 1;
+			redPoints += 1;	// implements red score
 			ball.x = 500;
 			ball.y = 350;
 			delta = new Point(-5,5);
