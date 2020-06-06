@@ -11,8 +11,8 @@ public class Pong extends Canvas
 	Point delta;
 	Ellipse2D.Double ball;
 	Rectangle paddle1, paddle2;
-	static int bluePoints = 0;
-	static int redPoints = 0;
+	int bluePoints = 0;
+	int redPoints = 0;
 	
 	public static void main( String[] args )
 	{
@@ -58,8 +58,10 @@ public class Pong extends Canvas
 		g2.setColor(Color.red);
 		g2.fill(paddle2);
 		// added drawString for showing the score
-		g.drawString("Blue score: " + bluePoints, 30, 20);
-		g.drawString("Red score: " + redPoints, 900, 20);
+		g2.setColor(Color.blue);
+		g2.drawString("Blue score: " + bluePoints, 30, 20);
+		g2.setColor(Color.red);
+		g2.drawString("Red score: " + redPoints, 900, 20);
 	}
 
 	public void processKeyEvent(KeyEvent e)
